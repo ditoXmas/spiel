@@ -40,15 +40,47 @@ body {
 /* Modal Styles */
 .modal {
     position: relative;
-    background-color: #333;
+    background-color: rgb(22, 21, 30);
     color: #fff;
-    padding: 20px;
+    padding: 24px 24px 80px 24px;
     border-radius: 8px;
     width: 100%;
-    max-width: 400px;
+    max-width: 900px;
     text-align: center;
     margin-bottom: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.modal-image {
+    width: 100%;
+    height: auto;
+    margin-top: 32px;
+    margin-bottom: 24px;
+}
+
+.modal-text {
+    text-align: justify;
+    padding: 0 60px 0 60px;
+}
+
+.modal-btn {
+    margin-top: 56px;
+    background-color: #9a9a9d;
+    padding: 10px;
+    width: 320px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: "Source Sans 3", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 24px;
+}
+
+.modal-btn:hover {
+    background-color: #99042e;
 }
 
 .close-modal {
@@ -194,7 +226,7 @@ body {
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
-    font-size: 32px;
+    font-size: 34px;
     margin-bottom: 32px;
 }
 

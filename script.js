@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementsByClassName("modal")
     const startContent = document.getElementsByClassName("start-content")
-    const closeModal = document.getElementsByClassName("close-modal")
+    const closeModal = document.getElementsByClassName("modal-btn")
     const nameField = document.getElementById("playerName")
     const gameView = document.getElementsByClassName("game-view")
     const errorMessage = document.getElementById('error-message');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (nameField.value !== "") {
             // Store the player's name in the variable
             playerName = nameField.value;
-            tschüssText = `Hallo ${playerName}, vielen Dank für die tolle Zusammenarbeit in 2024. Dir und deiner Familie nur das Beste und eine tolle Weihnachtszeit \u2764`
+            tschüssText = `Hallo ${playerName}, \n vielen Dank für die tolle Zusammenarbeit in 2024. Dir und deiner Familie nur das Beste und eine besinnliche Weihnachtszeit \u2764`
     
             // Hide start screen and show game view
             startContent[0].style.display = "none"
@@ -49,8 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // erste Funktion zum Starten des Spiels
     const startGame = () => {
-        console.log("Spiel startet")
-        
         inventory = {
             lebkuchen: false,
             glühwein: false
@@ -70,10 +68,20 @@ document.addEventListener('DOMContentLoaded', function() {
              }  
         })
 
-        if(sceneContent.goodbyeText) {
+        if(sceneContent.goodbyeText && sceneID != 32) {
+            optionsContainer.classList.add("game-buttons-endScreen")
             goodbyeTextField.innerText = tschüssText
             goodbyeTextField.classList.remove("hidden")
             goodbyeTextField.classList.add("goodbye-text")
+        } else if (sceneID === 32) {
+            if(!inventory.lebkuchen) {
+                optionsContainer.classList.add("game-buttons-endScreen")
+                goodbyeTextField.innerText = tschüssText
+                goodbyeTextField.classList.remove("hidden")
+                goodbyeTextField.classList.add("goodbye-text")
+            } else {
+                optionsContainer.classList.add("game-buttons-endScreen")
+            }
         }
 
         sceneText[0].innerText = sceneContent.sceneDescription
@@ -83,15 +91,8 @@ document.addEventListener('DOMContentLoaded', function() {
             optionsContainer.removeChild(optionsContainer.firstElementChild)
         }
 
-        if(sceneContent.goodbyeText) {
-            console.log("Add the css class for one button");
-            optionsContainer.classList.add("game-buttons-endScreen")
-        }
-
         sceneContent.options.forEach(option => {
             if(option.showThisOption()) {
-                console.log(option)
-
                 const newButton = document.createElement("button")
     
                 newButton.innerText = option.optionText
@@ -105,8 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // diese Funktion verarbeitet die Auswahl der nächsten Option
     const selectOption = (option) => {
-        console.log(inventory)
-
         if(option.inventoryWithThisOption) {
             inventory = option.inventoryWithThisOption
         }
@@ -118,18 +117,6 @@ document.addEventListener('DOMContentLoaded', function() {
             showSceneContent(option.nextScene)
         }
     }
-
-    /*
-        TODO:
-        - Button am Ende wenn nur noch eine Option ist fixen
-        - Allen Endszene TschüssText auf true und nextScene = 0
-            - PageReload
-        - Modal Text fertig machen / Entscheiden ob wir es noch brauchen
-        - Testen
-        - Neue Mailadresse
-        - Neuer GitHub Account
-        - Code pushen & gitHub pages
-    */
 
     const fillSceneData = () => {
         scenes = [
@@ -274,9 +261,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 9,
                 sceneDescription: "Während du aufräumst, verschwindet das Rentier durch die offene Tür. Immerhin sehen Büro und Baum wieder ganz passabel aus. Weihnachten kann kommen.",
                 image: "img/9.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -286,9 +274,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 10,
                 sceneDescription: "Das Rentier nimmt den Lebkuchen und schmatzt zufrieden. Es ist glücklich und bleibt bei euch. Zwar ist das Büro chaotisch, doch das stört nicht. Alle lieben das neue Büro-Rentier.",
                 image: "img/10.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -298,9 +287,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 11,
                 sceneDescription: "Du hast Pech. Das Rentier liebt seine Freiheit. Es entwischt. Aus Protest hebt es sein Bein und pinkelt an deinen Baum, bevor es verschwindet. Ohje, da musst du dir bis Weihnachten was einfallen lassen!",
                 image: "img/11.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -327,9 +317,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 14,
                 sceneDescription: "Zufällig kommt die Verwaltungsleitung vorbei und bemerkt den Geruch. Alkohol am Arbeitsplatz? Unverschämt! Die Weihnachtsfeier wird dieses Jahr gestrichen. Da hast du ja was angerichtet!",
                 image: "img/14.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -339,9 +330,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 15,
                 sceneDescription: "Der Baum duftet jetzt zwar nach Lavendel. Doch nach und nach fallen alle Nadeln ab. Nach 10 Minuten stehst du vor einem kahlen Gerippe. Du musst es wohl mit einem neuen Baum nochmal versuchen.",
                 image: "img/15.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -351,9 +343,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 13,
                 sceneDescription: "Der Baumschmuck ist vergessen, denn der Schaden muss sofort repariert werden. Du wirst zum Helferlein des Hausmeisters und assistierst. Zeit zum Baumschmücken bleibt dir nicht mehr. Das muss jemand anderes übernehmen.",
                 image: "img/13.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -380,9 +373,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 17,
                 sceneDescription: "Die Kette reißt ruckartig und du stolperst. Beim Fallen reißt du den Baum um. Du selbst bleibst zum Glück unversehrt, aber die Tanne ist dahin. Du solltest eine neue besorgen und es erneut probieren.",
                 image: "img/17.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -390,11 +384,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 
             {
                 id: 18,
-                sceneDescription: "Der Knoten wird schlimmer und plötzlich ist die ganze Lichterkette um dich gewickelt. So kannst du keinen Baum schmücken. Du wartest auf jemanden, der dich befreit.",
+                sceneDescription: "Plötzlich ist die ganze Lichterkette um dich gewickelt. Du bist wie gefesselt und kannst auf keinen Fall weiter schmücken. Vielmehr fühlst du dich selbst wie der Weihnachtsbaum. Blinkend wartest du auf jemanden, der dich befreit.",
                 image: "img/18.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -443,9 +438,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 21,
                 sceneDescription: "Der Gnom trommelt mit seinen Fäusten auf seinen Bauch. Kurz bebt die Erde. Erschrocken läufst du zum Baum. Hättest du ihn nur stabilisiert. Jetzt liegt er kaputt am Boden.",
                 image: "img/21.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -472,9 +468,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 24,
                 sceneDescription: "Eine Rundmail von P&B kommt. Die Heizung ist kaputt. Alle dürfen für heute nach Hause. Gemeinsam mit deinem Team gehst du auf den Weihnachtsmarkt - hier gibt es auch tolle Bäume!",
                 image: "img/24.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -482,11 +479,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 
             {
                 id: 25,
-                sceneDescription: "Der Gnom schnipst und schon sieht der Baum toll aus. In Rot und Silber gehüllt. Mit Kugeln, Schleifen und Lichtern. Weihnachten kann kommen!",
+                sceneDescription: "Der Gnom grunzt und schon sieht der Baum toll aus. In Rot und Silber gehüllt. Mit Kugeln, Schleifen und Lichtern. Weihnachten kann kommen!",
                 image: "img/25.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -496,9 +494,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 23,
                 sceneDescription: "Der Gnom willigt ein. Leider ist er extrem kitzelig an den Füßen. Lachend schießt er wie ein Flummi durch das Büro. Der Baum wird getroffen, knickt ab und fällt zu Boden. Ohje…",
                 image: "img/23.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -532,7 +531,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         showThisOption: () => true,
                     },
                     {
-                        optionText: "Du schneidest ein paar Sterne aus Post-Ist aus.",
+                        optionText: "Du schneidest ein paar Sterne aus Post-Its aus.",
                         nextScene: 29,
                         showThisOption: () => true,
                     },
@@ -542,9 +541,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 28,
                 sceneDescription: "Du montierst die Festplatte als Baumspitze. Leider hast du vergessen, dass der Baum schon zu Beginn sehr wackelig und schief war. Es kommt, wie es muss: Die Festplatte ist zu schwer. Der Baum bricht und fällt wie ein Sack.",
                 image: "img/28.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -554,13 +554,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 29,
                 sceneDescription: "Auch wenn die Sterne nicht leuchten, geben sie deinem individuellen Baumschmuck ein schönes Finish. Das Fest kann beginnen.",
                 image: "img/29.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
-
                 ]
             }, 
             {
@@ -582,11 +582,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 
             {
                 id: 31,
-                sceneDescription: "Offenbar bist du an einen korrupten Elfen gelangt. Er wird dich nicht verpetzen. Im Gegenteil. Schnell schnappt er sich alle Sachen und verschwindet. Unter der Beute ist auch der Autoschlüssel des Chefs. Du schluckst. Statt zu schmücken gehst du beichten.",
+                sceneDescription: "Offenbar bist du an einen korrupten Elfen gelangt. Er wird dich nicht verpetzen. Im Gegenteil. Schnell schnappt er sich alle Sachen und verschwindet. Unter der Beute ist auch der Autoschlüssel des Chefs. Du schluckst. Statt zu schmücken, gehst du beichten.",
                 image: "img/31.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
@@ -596,6 +597,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 32,
                 sceneDescription: "Der Elf nickt. Er ist da, um dir zu helfen. Schnell dreht er sich dreimal um sich selbst und siehe da: der Baum ist knallbunt geschmückt. Mit Zuckerstangen, Bonbons und Leckereien.",
                 image: "img/32.jpeg",
+                goodbyeText: true,
                 options: [
                     {
                         optionText: "Du bietest dem Elfen als Dank einen Lebkuchen an.",
@@ -603,7 +605,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         showThisOption: () => inventory.lebkuchen,
                     },
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => !inventory.lebkuchen,
                     },
@@ -611,11 +613,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 
             {
                 id: 33,
-                sceneDescription: "Der Elf freut sich. Sowas erlebt er selten. Er schnipst und reicht dir einen tollen Weihnachtspulli, damit du passend zum Baum gekleidet bist.",
+                sceneDescription: "Der Elf freut sich. Sowas erlebt er selten. Er schnippt und reicht dir einen tollen Weihnachtspulli, damit du passend zum Baum gekleidet bist.",
                 image: "img/33.jpeg",
+                goodbyeText: true,
                 options: [
                     {
-                        optionText: "",
+                        optionText: "Nochmal spielen",
                         nextScene: 0,
                         showThisOption: () => true,
                     },
