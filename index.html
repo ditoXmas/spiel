@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Page</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Script&family=Playwrite+US+Modern:wght@100..400&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Start Screen Container -->
+        <div class="start-screen">
+            <!-- Modal for Start Screen -->
+            <div class="modal">
+                <span class="close-modal">✖</span>
+                <h2>Was dich erwartet</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ut repellat natus harum! Distinctio excepturi temporibus deserunt, esse, cumque officia facilis porro reprehenderit recusandae explicabo rem quia blanditiis natus veritatis.</p>
+            </div>
+            <!-- Start Game Content -->
+            <div class="start-content">
+                <img src="./img/1.jpeg" alt="Start Screen Image" class="start-image">
+                <p>Du hast den Auftrag erhalten, den DITO-Weihnachtsbaum zu schmücken.</p>
+                <p>Stellst du dich der Challenge?</p>
+                <div class="input-btn-container">
+                    <input type="text" placeholder="Dein Name" id="playerName">
+                    <div id="error-message" class="error-message"></div>
+                    <button class="btn-start">Spiel starten</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game View Container -->
+        <div class="game-view">
+            <div class="game-content">
+                <img src="./img/1.jpeg" alt="Game Image" class="game-image">
+                <div class="game-text">
+                    Offenbar bist du an einen korrupten Elf gelangt. Er wird dich nicht verpetzen. Im Gegenteil. Schnell schnappt er sich alle Sachen und verschwindet. Unter der Beute ist auch der Autoschlüssel des Chefs. Du schluckst. Statt zu schmücken gehst du beichten.
+                </div>
+                <div id="goodbye-text" class="hidden"></div>
+                <div id="game-buttons">
+                    <button class="game-btn">Einen Keks? Wir sind hier nicht bei Wünsch-dir-was!</button>
+                    <button class="game-btn">Du bietest statt des Kekses einen Lebkuchen an.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+

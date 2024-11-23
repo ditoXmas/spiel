@@ -1,0 +1,216 @@
+/* General Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Source Sans 3", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: black;
+    font-size: 32px;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Start Screen Styles */
+.start-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal Styles */
+.modal {
+    position: relative;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.start-content {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.start-content img.start-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+.start-content p {
+    margin-bottom: 15px;
+}
+
+.start-content input {
+    padding: 10px;
+    width: calc(100% - 24px);
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Error Message Styles */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Game View Styles */
+.game-view {
+    display: none;
+    text-align: center;
+}
+
+.game-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.game-text {
+    text-align: justify;
+    margin: 8px 0 32px 0;
+    font-size: 24px;
+}
+
+#game-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+    max-width: 1000px;              
+    margin: 0 auto;  
+}
+
+#game-buttons.game-buttons-endScreen {
+    display: flex;
+}
+
+.game-btn {
+    display: flex;
+    align-items: flex-start;        
+    justify-content: center;        
+    padding: 10px;
+    box-sizing: border-box;         
+    word-wrap: break-word;          
+    text-align: center;   
+    padding: 10px;
+    height: 100%;           
+    box-sizing: border-box;
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #9a9a9d;
+    color: white;
+    white-space: normal;
+    font-family: "Source Sans 3", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.game-btn:hover {
+    background-color: #99042e;
+}
+
+#playerName {
+    font-family: "Source Sans 3", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    width: 320px;
+}
+
+.input-btn-container {
+    margin-top: 80px;
+}
+
+.btn-start {
+    background-color: #9a9a9d;
+    padding: 10px;
+    width: 320px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: "Source Sans 3", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 24px;
+}
+
+.btn-start:hover {
+    background-color: #99042e;
+}
+
+.goodbye-text {
+    font-family: "Playwrite US Modern", cursive;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 32px;
+    margin-bottom: 32px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+
+    .modal,
+    .start-content,
+    .game-buttons button {
+        width: 100%;
+    }
+}
